@@ -10,3 +10,11 @@ A simple backend REST API for a blog built using NestJS, Prisma, PostgreSQL and 
 3. Apply database migrations: `npx prisma migrate dev` 
 4. Start the project:  `npm run start:dev`
 5. Access the project at http://localhost:3000/api
+
+### For serverless
+1. Install dependencies: `npm install`.
+2. Start a PostgreSQL database with docker using: `docker-compose up -d`. 
+3. Apply database migrations: `npx prisma migrate dev`.
+4. Build the code: `npm run build`.
+5. Package the code using webpack: `sls package` (optional as `sls offline` will do this as well).
+6. Deploy using serverless offline: `sls offline` and follow the instructions.

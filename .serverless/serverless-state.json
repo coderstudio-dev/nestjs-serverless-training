@@ -177,7 +177,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/nestjs-rest-api/dev/1678668798428-2023-03-13T00:53:18.428Z/nestjs-rest-api.zip"
+                "S3Key": "serverless/nestjs-rest-api/dev/1678761045441-2023-03-14T02:30:45.441Z/nestjs-rest-api.zip"
               },
               "Handler": "dist/src/serverless.handler",
               "Runtime": "nodejs18.x",
@@ -200,14 +200,14 @@
               "MainLogGroup"
             ]
           },
-          "MainLambdaVersionEOLxadScYm0z6dXhC0MACZHTelPvsxEsCN90d7Dqc": {
+          "MainLambdaVersionr4ysm2wvVKpySb8uTcYisTNajvsprZ0ZG28n8tpMX4g": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "MainLambdaFunction"
               },
-              "CodeSha256": "wJwAScr1jeObIQeVY4lElfdXpQIl5tljUinIRqZhLQA="
+              "CodeSha256": "1eNUbPEe99+U7xkRGeArYdgCdg0NoltK+4R3xHWLAUM="
             }
           },
           "ApiGatewayRestApi": {
@@ -332,7 +332,7 @@
               "MainLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1678668778026": {
+          "ApiGatewayDeployment1678760952137": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -395,7 +395,7 @@
           "MainLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "MainLambdaVersionEOLxadScYm0z6dXhC0MACZHTelPvsxEsCN90d7Dqc"
+              "Ref": "MainLambdaVersionr4ysm2wvVKpySb8uTcYisTNajvsprZ0ZG28n8tpMX4g"
             },
             "Export": {
               "Name": "sls-nestjs-rest-api-dev-MainLambdaFunctionQualifiedArn"
@@ -554,7 +554,7 @@
         "timeout": 6,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "MainLambdaVersionEOLxadScYm0z6dXhC0MACZHTelPvsxEsCN90d7Dqc"
+        "versionLogicalId": "MainLambdaVersionr4ysm2wvVKpySb8uTcYisTNajvsprZ0ZG28n8tpMX4g"
       }
     },
     "configValidationMode": "warn",
@@ -576,7 +576,7 @@
           "!node_modules/@prisma/engines/**"
         ],
         "artifactsS3KeyDirname": "serverless/nestjs-rest-api/dev/code-artifacts",
-        "artifactDirectoryName": "serverless/nestjs-rest-api/dev/1678668798428-2023-03-13T00:53:18.428Z"
+        "artifactDirectoryName": "serverless/nestjs-rest-api/dev/1678761045441-2023-03-14T02:30:45.441Z"
       },
       "provider": {
         "$ref": "$[\"service\"][\"provider\"]"
@@ -589,7 +589,7 @@
     "isDashboardMonitoringPreconfigured": false
   },
   "package": {
-    "artifactDirectoryName": "serverless/nestjs-rest-api/dev/1678668798428-2023-03-13T00:53:18.428Z",
+    "artifactDirectoryName": "serverless/nestjs-rest-api/dev/1678761045441-2023-03-14T02:30:45.441Z",
     "artifact": ""
   }
 }

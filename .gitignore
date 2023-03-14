@@ -40,3 +40,6 @@ notes
 
 # Webpack
 .webpack/*
+
+# Serverless
+.serverless/*
