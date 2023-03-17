@@ -10,12 +10,218 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Article {
+model Users {
   id          Int      @id @default(autoincrement())
+  profiles Profiles[]
+  emailAddress  String  @db.VarChar(256)
+  emailVerified Boolean
+  authToken   String  @db.Text
+  session     String  @db.Text
+  sessionExpire   DateTime
+  lastLogin   DateTime
+  isActive    Boolean
+
+  @@map("users")
+}
+
+model Countries {
+  id          Int      @id @default(autoincrement())
+  profiles    Profiles[]
+  name        String   @db.VarChar(256)
+  countryCode String   @db.VarChar(256)
+  iso2        String   @db.VarChar(256)
+  iso3        String   @db.VarChar(256)
+
+  @@map("countries")
+}
+
+model Profiles {
+  id          Int      @id @default(autoincrement())
+  users       Users @relation(fields: [userId], references: [id])
+  userId      Int
+  firstName   String   @db.VarChar(256)
+  lastName    String   @db.VarChar(256)
+  middleName  String?  @db.VarChar(256)
+  displayName String?  @db.VarChar(256)
+  about       String?   @db.VarChar(256)
+  skillLanguages   String?  @db.Text
+  work        String?  @db.Text
+  emailAddress  String  @db.VarChar(256)
+  stateProvinceCity   String?  @db.VarChar(256)
+  countries   Countries @relation(fields: [countryId], references: [id])
+  countryId   Int
+  currentLearning  String?  @db.Text
+  currentHacking   String?  @db.Text
+  availableFor     String?  @db.Text
+  photo      String?  @db.Text
+
+  articles  Articles[]
+  profile_badges ProfileBadges[]
+  profilefollowers ProfileFollows[] @relation("profileFollowersFK")
+  profilefollowing ProfileFollows[] @relation("profileFollowingFK")
+  saved_articles SavedArticles[]
+  profile_repositories ProfileRepositories[]
+
+  @@map("profiles")
+}
+
+model Articles {
+  id          Int      @id @default(autoincrement())
+  profiles    Profiles @relation(fields: [profileId], references: [id])
+  profileId   Int
   title       String   @unique
-  description String?
-  body        String
-  published   Boolean  @default(false)
+  description String?  @db.Text
+  body        String   @db.Text
+  coverBanner String   @db.VarChar(256)
+  status      String   @db.VarChar(256)
+  isPinned    Boolean?
+  draftBy     Int?
+  draftAt     DateTime?
+  postedBy    Int?
+  postedAt    DateTime?
+  createdBy   Int
   createdAt   DateTime @default(now())
+  updatedBy   Int
   updatedAt   DateTime @updatedAt
+
+  saved_articles SavedArticles[]
+  article_tags ArticleTags[]
+  article_reactions ArticleReactions[]
+  comments Comments[]
+
+  @@map("articles")
+}
+
+model AppConstants {
+  id          Int      @id @default(autoincrement())
+  category    String   @db.VarChar(256)
+  name        String   @db.VarChar(256)
+  icon        String?  @db.Text
+
+  profile_repositories ProfileRepositories[]
+  article_reactions ArticleReactions[]
+  comment_reactions CommentReactions[]
+
+  @@map("app_constants")
+}
+
+model Badges {
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(256)
+  badge       String   @db.Text
+  createdBy   Int
+  createdAt   DateTime
+
+  profile_badges ProfileBadges[]
+
+  @@map("badges")
+}
+
+model Tags {
+  id          Int      @id @default(autoincrement())
+  name        String
+  tagCount    Int
+
+  article_tags ArticleTags[]
+  
+  @@map("tags")
+}
+
+model ProfileBadges {
+  id          Int      @id @default(autoincrement())
+  profiles    Profiles @relation(fields: [profileId], references: [id])
+  profileId   Int
+  badges      Badges @relation(fields: [badgeId], references: [id])
+  badgeId     Int
+  status      String   @db.VarChar(256)
+  createdBy   Int
+  createdAt   DateTime
+
+  @@map("profile_badges")
+}
+
+model ProfileFollows {
+  id          Int      @id @default(autoincrement())
+  profiles    Profiles @relation("profileFollowersFK", fields: [profileId], references: [id])
+  profileId   Int
+  profileFollowingFK    Profiles @relation("profileFollowingFK", fields: [following], references: [id])
+  following     Int
+  status      String   @db.VarChar(256)
+  createdBy   Int
+  createdAt   DateTime
+
+  @@map("profile_follows")
+}
+
+model ProfileRepositories {
+  id          Int      @id @default(autoincrement())
+  profiles    Profiles @relation(fields: [profileId], references: [id])
+  profileId   Int
+  repoLink    String   @db.Text
+  appConstants    AppConstants @relation(fields: [appConstantId], references: [id])
+  appConstantId   Int  
+  createdBy   Int
+  createdAt   DateTime
+
+  @@map("profile_repositories")
+}
+
+model SavedArticles {
+  id          Int      @id @default(autoincrement())
+  profiles    Profiles @relation(fields: [profileId], references: [id])
+  profileId   Int
+  articles    Articles @relation(fields: [articleId], references: [id])
+  articleId   Int
+  savedAt     DateTime
+
+  @@map("saved_articles")
+}
+
+model ArticleReactions {
+  id          Int      @id @default(autoincrement())
+  articles    Articles @relation(fields: [articleId], references: [id])
+  articleId   Int
+  appConstants    AppConstants @relation(fields: [appConstantId], references: [id])
+  appConstantId Int
+  reactedBy   Int
+  reactedAt   DateTime
+
+  @@map("article_reactions")
+}
+
+model ArticleTags {
+  id          Int      @id @default(autoincrement())
+  tags        Tags     @relation(fields: [tagsId], references: [id])
+  tagsId      Int
+  articles    Articles @relation(fields: [articleId], references: [id])
+  articleId   Int
+  createdAt   DateTime
+
+  @@map("article_tags")
+}
+
+model Comments {
+  id          Int      @id @default(autoincrement())
+  articles    Articles @relation(fields: [articleId], references: [id])
+  articleId   Int
+  parentId    Int?
+  comments    String   @db.Text
+  createdBy   Int
+  createdAt   DateTime
+
+  comment_reactions CommentReactions[]
+
+  @@map("comments")
+}
+
+model CommentReactions {
+  id          Int      @id @default(autoincrement())
+  comments    Comments @relation(fields: [commentId], references: [id])
+  commentId   Int
+  appConstants    AppConstants @relation(fields: [appConstantId], references: [id])
+  appConstantId Int
+  reactedBy   Int
+  reactedAt   DateTime
+
+  @@map("comment_reactions")
 }
