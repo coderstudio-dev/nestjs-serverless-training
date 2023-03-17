@@ -17,7 +17,6 @@ export const handler = async (event: any, context: any) => {
       .setTitle('Web Tech Training')
       .setDescription('Web Tech Training API')
       .setVersion('0.1')
-      .setBasePath('/dev')
       .build();
 
     const document = SwaggerModule.createDocument(nestApp, config);
