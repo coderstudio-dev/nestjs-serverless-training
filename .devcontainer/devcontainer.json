@@ -8,10 +8,13 @@
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
     "ghcr.io/devcontainers-contrib/features/nestjs-cli:2": {},
-    "ghcr.io/devcontainers-contrib/features/serverless:2": {}
+    "ghcr.io/devcontainers-contrib/features/serverless:2": {},
+    "ghcr.io/devcontainers/features/aws-cli:1": {}
   },
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  "forwardPorts": [3003],
+  "forwardPorts": [
+    3003
+  ],
   // Use 'postCreateCommand' to run commands after the container is created.
   "postCreateCommand": "npm i",
   "customizations": {
