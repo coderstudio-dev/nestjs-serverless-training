@@ -1,5 +1,5 @@
-import { Article } from '@prisma/client';
+import { Articles } from '@prisma/client';
 
 export default interface FindDrafts {
-  findDrafts(): Promise<Article[]>;
+  findDrafts(): Promise<Articles[]>;
 }

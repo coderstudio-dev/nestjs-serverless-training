@@ -9,29 +9,29 @@ export class ArticleRepository implements ArticleRepoInterface {
   constructor(private db: DatabaseService) {}
 
   create(createArticleDto: CreateArticleDto) {
-    return this.db.article.create({ data: createArticleDto });
+    return this.db.articles.create({ data: createArticleDto });
   }
 
   findDrafts() {
-    return this.db.article.findMany({ where: { published: false } });
+    return this.db.articles.findMany({ where: { status: 'draft' } });
   }
 
   findAll() {
-    return this.db.article.findMany({ where: { published: true } });
+    return this.db.articles.findMany({ where: { status: 'posted' } });
   }
 
   findOne(id: number) {
-    return this.db.article.findUnique({ where: { id } });
+    return this.db.articles.findUnique({ where: { id } });
   }
 
   update(id: number, updateArticleDto: UpdateArticleDto) {
-    return this.db.article.update({
+    return this.db.articles.update({
       where: { id },
       data: updateArticleDto,
     });
   }
 
   remove(id: number) {
-    return this.db.article.delete({ where: { id } });
+    return this.db.articles.delete({ where: { id } });
   }
 }

@@ -8,9 +8,15 @@ import {
   IsString,
   MaxLength,
   MinLength,
+  IsInt,
 } from 'class-validator';
 
 export class CreateArticleDto {
+  @IsInt()
+  @IsNotEmpty()
+  @ApiProperty()
+  profileId: number;
+
   @IsString()
   @IsNotEmpty()
   @MinLength(5)
@@ -29,8 +35,50 @@ export class CreateArticleDto {
   @ApiProperty()
   body: string;
 
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty()
+  coverBanner: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty()
+  status: string;
+
   @IsBoolean()
   @IsOptional()
-  @ApiProperty({ required: false, default: false })
-  published?: boolean = false;
+  @ApiProperty()
+  isPinned?: boolean = false;
+
+  @IsOptional()
+  @ApiProperty()
+  draftBy?: number;
+
+  @IsOptional()
+  @ApiProperty()
+  draftAt?: Date;
+
+  @IsOptional()
+  @ApiProperty()
+  postedBy?: number;
+
+  @IsOptional()
+  @ApiProperty()
+  postedAt?: Date;
+
+  @IsOptional()
+  @ApiProperty()
+  createdBy?: number;
+
+  @IsOptional()
+  @ApiProperty()
+  createdAt?: Date;
+
+  @IsOptional()
+  @ApiProperty()
+  updatedBy?: number;
+
+  @IsOptional()
+  @ApiProperty()
+  updatedAt?: Date;
 }
