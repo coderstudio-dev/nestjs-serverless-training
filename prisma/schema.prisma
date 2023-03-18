@@ -5,7 +5,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
+datasource postgres {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
@@ -13,10 +13,10 @@ datasource db {
 model Users {
   id          Int      @id @default(autoincrement())
   profiles Profiles[]
-  emailAddress  String  @db.VarChar(256)
+  emailAddress  String  @postgres.VarChar(256)
   emailVerified Boolean
-  authToken   String  @db.Text
-  session     String  @db.Text
+  authToken   String  @postgres.Text
+  session     String  @postgres.Text
   sessionExpire   DateTime
   lastLogin   DateTime
   isActive    Boolean
@@ -27,10 +27,10 @@ model Users {
 model Countries {
   id          Int      @id @default(autoincrement())
   profiles    Profiles[]
-  name        String   @db.VarChar(256)
-  countryCode String   @db.VarChar(256)
-  iso2        String   @db.VarChar(256)
-  iso3        String   @db.VarChar(256)
+  name        String   @postgres.VarChar(256)
+  countryCode String   @postgres.VarChar(256)
+  iso2        String   @postgres.VarChar(256)
+  iso3        String   @postgres.VarChar(256)
 
   @@map("countries")
 }
@@ -39,21 +39,21 @@ model Profiles {
   id          Int      @id @default(autoincrement())
   users       Users @relation(fields: [userId], references: [id])
   userId      Int
-  firstName   String   @db.VarChar(256)
-  lastName    String   @db.VarChar(256)
-  middleName  String?  @db.VarChar(256)
-  displayName String?  @db.VarChar(256)
-  about       String?   @db.VarChar(256)
-  skillLanguages   String?  @db.Text
-  work        String?  @db.Text
-  emailAddress  String  @db.VarChar(256)
-  stateProvinceCity   String?  @db.VarChar(256)
+  firstName   String   @postgres.VarChar(256)
+  lastName    String   @postgres.VarChar(256)
+  middleName  String?  @postgres.VarChar(256)
+  displayName String?  @postgres.VarChar(256)
+  about       String?   @postgres.VarChar(256)
+  skillLanguages   String?  @postgres.Text
+  work        String?  @postgres.Text
+  emailAddress  String  @postgres.VarChar(256)
+  stateProvinceCity   String?  @postgres.VarChar(256)
   countries   Countries @relation(fields: [countryId], references: [id])
   countryId   Int
-  currentLearning  String?  @db.Text
-  currentHacking   String?  @db.Text
-  availableFor     String?  @db.Text
-  photo      String?  @db.Text
+  currentLearning  String?  @postgres.Text
+  currentHacking   String?  @postgres.Text
+  availableFor     String?  @postgres.Text
+  photo      String?  @postgres.Text
 
   articles  Articles[]
   profile_badges ProfileBadges[]
@@ -70,10 +70,10 @@ model Articles {
   profiles    Profiles @relation(fields: [profileId], references: [id])
   profileId   Int
   title       String   @unique
-  description String?  @db.Text
-  body        String   @db.Text
-  coverBanner String   @db.VarChar(256)
-  status      String   @db.VarChar(256)
+  description String?  @postgres.Text
+  body        String   @postgres.Text
+  coverBanner String   @postgres.VarChar(256)
+  status      String   @postgres.VarChar(256)
   isPinned    Boolean?
   draftBy     Int?
   draftAt     DateTime?
@@ -94,9 +94,9 @@ model Articles {
 
 model AppConstants {
   id          Int      @id @default(autoincrement())
-  category    String   @db.VarChar(256)
-  name        String   @db.VarChar(256)
-  icon        String?  @db.Text
+  category    String   @postgres.VarChar(256)
+  name        String   @postgres.VarChar(256)
+  icon        String?  @postgres.Text
 
   profile_repositories ProfileRepositories[]
   article_reactions ArticleReactions[]
@@ -107,8 +107,8 @@ model AppConstants {
 
 model Badges {
   id          Int      @id @default(autoincrement())
-  name        String   @db.VarChar(256)
-  badge       String   @db.Text
+  name        String   @postgres.VarChar(256)
+  badge       String   @postgres.Text
   createdBy   Int
   createdAt   DateTime
 
@@ -133,7 +133,7 @@ model ProfileBadges {
   profileId   Int
   badges      Badges @relation(fields: [badgeId], references: [id])
   badgeId     Int
-  status      String   @db.VarChar(256)
+  status      String   @postgres.VarChar(256)
   createdBy   Int
   createdAt   DateTime
 
@@ -146,7 +146,7 @@ model ProfileFollows {
   profileId   Int
   profileFollowingFK    Profiles @relation("profileFollowingFK", fields: [following], references: [id])
   following     Int
-  status      String   @db.VarChar(256)
+  status      String   @postgres.VarChar(256)
   createdBy   Int
   createdAt   DateTime
 
@@ -157,7 +157,7 @@ model ProfileRepositories {
   id          Int      @id @default(autoincrement())
   profiles    Profiles @relation(fields: [profileId], references: [id])
   profileId   Int
-  repoLink    String   @db.Text
+  repoLink    String   @postgres.Text
   appConstants    AppConstants @relation(fields: [appConstantId], references: [id])
   appConstantId   Int  
   createdBy   Int
@@ -205,7 +205,7 @@ model Comments {
   articles    Articles @relation(fields: [articleId], references: [id])
   articleId   Int
   parentId    Int?
-  comments    String   @db.Text
+  comments    String   @postgres.Text
   createdBy   Int
   createdAt   DateTime
 

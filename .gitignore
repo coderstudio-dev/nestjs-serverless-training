@@ -37,6 +37,12 @@ lerna-debug.log*
 .env 
 
 notes 
+package-lock.json
+migration.sql
+
+# Compose
+docker-compose.yml
+
 
 # Webpack
 .webpack/*
