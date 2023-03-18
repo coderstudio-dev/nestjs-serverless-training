@@ -1,6 +1,6 @@
 // src/articles/dto/create-article.dto.ts
 
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
   IsBoolean,
   IsNotEmpty,
@@ -27,7 +27,7 @@ export class CreateArticleDto {
   @IsOptional()
   @IsNotEmpty()
   @MaxLength(300)
-  @ApiProperty({ required: false })
+  @ApiPropertyOptional()
   description?: string;
 
   @IsString()

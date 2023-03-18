@@ -1,24 +1,51 @@
-import { Article } from '@prisma/client';
-import { ApiProperty } from '@nestjs/swagger';
+import { Articles } from '@prisma/client';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
-export class ArticleEntity implements Article {
+export class ArticleEntity implements Articles {
   @ApiProperty()
   id: number;
 
   @ApiProperty()
+  profileId: number;
+
+  @ApiProperty()
   title: string;
 
-  @ApiProperty({ required: false, nullable: true })
+  @ApiPropertyOptional({ nullable: true })
   description: string | null;
 
   @ApiProperty()
   body: string;
 
   @ApiProperty()
-  published: boolean;
+  coverBanner: string;
+
+  @ApiProperty()
+  status: string;
+
+  @ApiPropertyOptional({ nullable: true })
+  isPinned: boolean | null;
+
+  @ApiPropertyOptional()
+  draftBy: number;
+
+  @ApiPropertyOptional()
+  draftAt: Date;
+
+  @ApiPropertyOptional()
+  postedBy: number;
+
+  @ApiPropertyOptional()
+  postedAt: Date;
+
+  @ApiProperty()
+  createdBy: number;
 
   @ApiProperty()
   createdAt: Date;
+
+  @ApiProperty()
+  updatedBy: number;
 
   @ApiProperty()
   updatedAt: Date;
