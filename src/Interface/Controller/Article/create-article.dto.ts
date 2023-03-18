@@ -27,8 +27,8 @@ export class CreateArticleDto {
   @IsOptional()
   @IsNotEmpty()
   @MaxLength(300)
-  @ApiPropertyOptional()
-  description?: string;
+  @ApiPropertyOptional({ nullable: true })
+  description: string;
 
   @IsString()
   @IsNotEmpty()
@@ -47,38 +47,34 @@ export class CreateArticleDto {
 
   @IsBoolean()
   @IsOptional()
-  @ApiProperty()
-  isPinned?: boolean = false;
+  @ApiPropertyOptional({ nullable: true })
+  isPinned = false;
 
   @IsOptional()
-  @ApiProperty()
-  draftBy?: number;
+  @ApiPropertyOptional()
+  draftBy: number;
 
   @IsOptional()
-  @ApiProperty()
-  draftAt?: Date;
+  @ApiPropertyOptional()
+  draftAt: Date;
 
   @IsOptional()
-  @ApiProperty()
-  postedBy?: number;
+  @ApiPropertyOptional()
+  postedBy: number;
 
   @IsOptional()
-  @ApiProperty()
-  postedAt?: Date;
+  @ApiPropertyOptional()
+  postedAt: Date;
 
-  @IsOptional()
   @ApiProperty()
-  createdBy?: number;
+  createdBy: number;
 
-  @IsOptional()
   @ApiProperty()
-  createdAt?: Date;
+  createdAt: Date;
 
-  @IsOptional()
   @ApiProperty()
-  updatedBy?: number;
+  updatedBy: number;
 
-  @IsOptional()
   @ApiProperty()
-  updatedAt?: Date;
+  updatedAt: Date;
 }
