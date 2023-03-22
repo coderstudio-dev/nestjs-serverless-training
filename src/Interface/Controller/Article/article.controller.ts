@@ -7,13 +7,15 @@ import {
   Param,
   Delete,
   ParseIntPipe,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CreateArticleDto } from './create-article.dto';
 import { UpdateArticleDto } from './update-article.dto';
 import { ArticleEntity } from 'src/Domain/Article/article.entity';
 import { ArticleProvider } from 'src/Infra/Repository/Article/article.provider';
-
+//import { AuthGuard } from '@nestjs/passport';
+import { AuthGuard } from 'src/App/auth/auth.guard';
 @Controller('articles')
 @ApiTags('articles')
 export class ArticleController {
@@ -31,6 +33,7 @@ export class ArticleController {
     return this.articleProvider.findAll();
   }
 
+  @UseGuards(AuthGuard)
   @Get('drafts')
   @ApiOkResponse({ type: ArticleEntity, isArray: true })
   findDrafts() {
