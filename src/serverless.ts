@@ -11,6 +11,8 @@ let cachedServer;
 export const handler = async (event: any, context: any) => {
   if (!cachedServer) {
     const nestApp = await NestFactory.create(AppModule);
+
+    nestApp.enableCors();
     nestApp.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 
     const config = new DocumentBuilder()
