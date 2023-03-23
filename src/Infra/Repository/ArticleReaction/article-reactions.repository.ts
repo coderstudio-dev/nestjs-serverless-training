@@ -31,4 +31,3 @@ export class ArticleReactionRepository implements ArticleReactionRepoInterface {
     return this.db.articleReactions.delete({ where: { id } });
   }
 }
-

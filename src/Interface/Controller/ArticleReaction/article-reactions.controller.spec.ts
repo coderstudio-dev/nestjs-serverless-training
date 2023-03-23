@@ -11,7 +11,9 @@ describe('ArticleReactionsController', () => {
       providers: [ArticleReactionsService],
     }).compile();
 
-    controller = module.get<ArticleReactionsController>(ArticleReactionsController);
+    controller = module.get<ArticleReactionsController>(
+      ArticleReactionsController,
+    );
   });
 
   it('should be defined', () => {
