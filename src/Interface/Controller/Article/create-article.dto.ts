@@ -24,6 +24,11 @@ export class CreateArticleDto {
   title: string;
 
   @IsString()
+  @IsNotEmpty()
+  @ApiProperty()
+  slug: string;
+
+  @IsString()
   @IsOptional()
   @IsNotEmpty()
   @MaxLength(300)
