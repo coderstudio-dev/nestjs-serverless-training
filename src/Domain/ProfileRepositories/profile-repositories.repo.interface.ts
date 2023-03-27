@@ -1,5 +1,5 @@
-import { Create, FindByProfileIdProfileRepo } from './useCases';
+import { Create, FindByProfileId } from './useCases';
 
 export interface ProfileRepositoriesRepoInterface
   extends Create,
-    FindByProfileIdProfileRepo {}
+    FindByProfileId {}

@@ -1,6 +1,6 @@
-import FindByProfileIdProfileRepo from './findByProfileIdProfileRepo';
+import FindByProfileId from './findByProfileId';
 import Create from './create';
 // import Remove from './remove';
 // import FindAll from './findAll';
 
-export { FindByProfileIdProfileRepo, Create };
+export { FindByProfileId, Create };
