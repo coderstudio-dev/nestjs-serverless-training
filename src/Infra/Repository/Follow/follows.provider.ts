@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { CreateFollowDto } from 'src/Interface/Controller/Follow/create-follow.dto';
-import { UpdateFollowDto } from 'src/Interface/Controller/Follow/update-follow.dto';
-import { FollowRepository } from './follows.resository';
+import { CreateFollowDto } from 'src/App/dto/Follow/create-follow.dto';
+import { UpdateFollowDto } from 'src/App/dto/Follow/update-follow.dto';
+import { FollowRepository } from './follows.repository';
 
 @Injectable()
 export class FollowsProvider {

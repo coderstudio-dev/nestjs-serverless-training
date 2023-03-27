@@ -5,6 +5,19 @@ const prisma = new PrismaClient();
 
 async function main() {
   // create two dummy articles
+  const user = await prisma.users.upsert({
+    where: { id: 1 },
+    update: {},
+    create: {
+      emailAddress: 'test@test.com',
+      emailVerified: true,
+      authToken: 'test',
+      session: 'test',
+      sessionExpire: new Date(),
+      lastLogin: new Date(),
+      isActive: true,
+    },
+  });
   const post1 = await prisma.articles.upsert({
     where: { title: 'Prisma Adds Support for MongoDB' },
     update: {},
@@ -18,12 +31,11 @@ async function main() {
       status: 'draft',
       coverBanner: 'test.png',
       createdBy: 1,
-      createdAt: '2023-03-18 00:00:00',
+      createdAt: new Date('2023-03-18 00:00:00'),
       updatedBy: 1,
-      updatedAt: '2023-03-18 00:00:00',
+      updatedAt: new Date('2023-03-18 00:00:00'),
     },
   });
-
   const post2 = await prisma.articles.upsert({
     where: { title: "What's new in Prisma? (Q1/22)" },
     update: {},
@@ -42,8 +54,7 @@ async function main() {
       updatedAt: '2023-03-18 00:00:00',
     },
   });
-
-  console.log({ post1, post2 });
+  console.log({ user, post1, post2 });
 }
 
 // execute the main function

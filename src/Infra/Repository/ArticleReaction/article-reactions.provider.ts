@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { CreateArticleReactionDto } from 'src/Interface/Controller/ArticleReaction/create-article-reaction.dto';
-import { UpdateArticleReactionDto } from 'src/Interface/Controller/ArticleReaction/update-article-reaction.dto';
+import { CreateArticleReactionDto } from 'src/App/dto/ArticleReaction/create-article-reaction.dto';
+import { UpdateArticleReactionDto } from 'src/App/dto/ArticleReaction/update-article-reaction.dto';
 import { ArticleReactionRepository } from './article-reactions.repository';
 
 @Injectable()

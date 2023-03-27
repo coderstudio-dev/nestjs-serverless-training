@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { FollowsProvider } from './follows.provider';
-import { FollowRepository } from './follows.resository';
+import { FollowRepository } from './follows.repository';
 import { DatabaseModule } from 'src/Infra/Database/database.module';
 
 @Module({

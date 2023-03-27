@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { DatabaseService } from 'src/Infra/Database/database.service';
-import { CreateArticleReactionDto } from 'src/Interface/Controller/ArticleReaction/create-article-reaction.dto';
-import { UpdateArticleReactionDto } from 'src/Interface/Controller/ArticleReaction/update-article-reaction.dto';
+import { CreateArticleReactionDto } from 'src/App/dto/ArticleReaction/create-article-reaction.dto';
+import { UpdateArticleReactionDto } from 'src/App/dto/ArticleReaction/update-article-reaction.dto';
 import { ArticleReactionRepoInterface } from 'src/Domain/ArticleReaction/article-reactions.repo.interface';
 
 @Injectable()

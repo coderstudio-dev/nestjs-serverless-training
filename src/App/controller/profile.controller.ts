@@ -10,8 +10,8 @@ import {
   //UseGuards,
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { CreateProfileDto } from './create-profile.dto';
-import { UpdateProfileDto } from './update-profile.dto';
+import { CreateProfileDto } from '../dto/Profile/create-profile.dto';
+import { UpdateProfileDto } from '../dto/Profile/update-profile.dto';
 import { ProfileEntity } from 'src/Domain/Profile/profile.entity';
 import { ProfileProvider } from 'src/Infra/Repository/Profile/profile.provider';
 //import { AuthGuard } from 'src/App/auth/auth.guard';

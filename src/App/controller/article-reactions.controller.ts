@@ -10,8 +10,8 @@ import {
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { ArticleReactionsEntity } from 'src/Domain/ArticleReaction/article-reaction.entity';
 import { ArticleReactionsProvider } from 'src/Infra/Repository/ArticleReaction/article-reactions.provider';
-import { CreateArticleReactionDto } from './create-article-reaction.dto';
-import { UpdateArticleReactionDto } from './update-article-reaction.dto';
+import { CreateArticleReactionDto } from '../dto/ArticleReaction/create-article-reaction.dto';
+import { UpdateArticleReactionDto } from '../dto/ArticleReaction/update-article-reaction.dto';
 
 @Controller('article-reactions')
 @ApiTags('article-reactions')
