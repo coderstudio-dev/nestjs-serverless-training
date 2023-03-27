@@ -1,5 +1,5 @@
 import { ArticleReactions } from '@prisma/client';
-import { CreateArticleReactionDto } from 'src/Interface/Controller/ArticleReaction/create-article-reaction.dto';
+import { CreateArticleReactionDto } from 'src/App/dto/ArticleReaction/create-article-reaction.dto';
 
 export default interface Create {
   create(

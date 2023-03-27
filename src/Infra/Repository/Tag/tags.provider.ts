@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { CreateTagDto } from 'src/Interface/Controller/Tag/create-tag.dto';
-import { UpdateTagDto } from 'src/Interface/Controller/Tag/update-tag.dto';
+import { CreateTagDto } from 'src/App/dto/Tag/create-tag.dto';
+import { UpdateTagDto } from 'src/App/dto/Tag/update-tag.dto';
 import { TagsRepository } from './tags.repository';
 
 @Injectable()

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { DatabaseService } from 'src/Infra/Database/database.service';
-import { CreateProfileDto } from 'src/Interface/Controller/Profile/create-profile.dto';
-import { UpdateProfileDto } from 'src/Interface/Controller/Profile/update-profile.dto';
+import { CreateProfileDto } from 'src/App/dto/Profile/create-profile.dto';
+import { UpdateProfileDto } from 'src/App/dto/Profile/update-profile.dto';
 import { ProfileRepoInterface } from 'src/Domain/Profile/profile.repo.interface';
 import { Profiles } from '@prisma/client';
 

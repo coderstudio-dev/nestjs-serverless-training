@@ -10,8 +10,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { CreateArticleDto } from './create-article.dto';
-import { UpdateArticleDto } from './update-article.dto';
+import { CreateArticleDto } from '../dto/Article/create-article.dto';
+import { UpdateArticleDto } from '../dto/Article/update-article.dto';
 import { ArticleEntity } from 'src/Domain/Article/article.entity';
 import { ArticleProvider } from 'src/Infra/Repository/Article/article.provider';
 import { AuthGuard } from 'src/App/auth/auth.guard';

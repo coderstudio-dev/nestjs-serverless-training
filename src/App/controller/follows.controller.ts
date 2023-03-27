@@ -8,8 +8,8 @@ import {
   Delete,
 } from '@nestjs/common';
 import { FollowsProvider } from 'src/Infra/Repository/Follow/follows.provider';
-import { CreateFollowDto } from './create-follow.dto';
-import { UpdateFollowDto } from './update-follow.dto';
+import { CreateFollowDto } from '../dto/Follow/create-follow.dto';
+import { UpdateFollowDto } from '../dto/Follow/update-follow.dto';
 
 @Controller('follows')
 export class FollowsController {
