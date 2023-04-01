@@ -23,6 +23,7 @@ model Users {
   lastLogin   DateTime
   isActive    Boolean
 
+
   @@map("users")
 }
 
@@ -63,6 +64,8 @@ model Profiles {
   profilefollowing ProfileFollows[] @relation("profileFollowingFK")
   saved_articles SavedArticles[]
   profile_repositories ProfileRepositories[]
+  comments Comments[]
+  favorites Favorites[]
 
   @@map("profiles")
 }
@@ -91,6 +94,7 @@ model Articles {
   article_tags ArticleTags[]
   article_reactions ArticleReactions[]
   comments Comments[]
+  favorites Favorites[]
 
   @@map("articles")
 }
@@ -207,11 +211,18 @@ model Comments {
   id          Int      @id @default(autoincrement())
   articles    Articles @relation(fields: [articleId], references: [id])
   articleId   Int
-  parentId    Int?
-  comments    String   @db.Text
+  profiles    Profiles @relation(fields: [profileId], references: [id])
+  profileId   Int
+  childId     Int?  @unique
+  child       Comments?   @relation("Child", fields: [childId], references: [id])
+  parentId    Int?  @unique
+  parent      Comments?   @relation("Parent", fields: [parentId], references: [id])
+  content     String   @db.Text
   createdBy   Int
   createdAt   DateTime
 
+  parentRef Comments? @relation("Parent")
+  childRef Comments?  @relation("Child")
   comment_reactions CommentReactions[]
 
   @@map("comments")
@@ -229,3 +240,11 @@ model CommentReactions {
   @@map("comment_reactions")
 }
 
+model Favorites {
+  id          Int       @id @default(autoincrement())
+  profiles    Profiles  @relation(fields: [profileId], references: [id])
+  profileId   Int
+  articles    Articles  @relation(fields: [articleId], references: [id])
+  articleId   Int
+  @@unique([profileId, articleId])
+}

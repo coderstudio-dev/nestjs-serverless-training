@@ -9,6 +9,7 @@ import { ProfileService } from './services/profile.service';
 import { TagsService } from './services/tags.service';
 import { ProfileRepositoriesService } from './services/profile-repositories.service';
 import { UserService } from './services/user.service';
+import { Favoriteservice } from './services/favorite.service';
 
 @Module({
   imports: [InfraModule],
@@ -20,6 +21,7 @@ import { UserService } from './services/user.service';
     TagsService,
     ProfileRepositoriesService,
     UserService,
+    Favoriteservice,
   ],
   exports: [
     ArticleService,
@@ -29,6 +31,7 @@ import { UserService } from './services/user.service';
     TagsService,
     ProfileRepositoriesService,
     UserService,
+    Favoriteservice,
   ],
 })
 export class DomainModule {}

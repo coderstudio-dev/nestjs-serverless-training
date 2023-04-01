@@ -12,6 +12,7 @@ import { FollowsController } from './controllers/follows.controller';
 import { ProfileController } from './controllers/profile.controller';
 import { TagsController } from './controllers/tags.controller';
 import { UserController } from './controllers/user.controller';
+import { FavoriteController } from './controllers/favorite.controller';
 
 @Module({
   imports: [DomainModule, ConfigModule.forRoot({ isGlobal: true })],
@@ -22,6 +23,7 @@ import { UserController } from './controllers/user.controller';
     ProfileController,
     TagsController,
     UserController,
+    FavoriteController,
   ],
 })
 export class AppModule implements NestModule {

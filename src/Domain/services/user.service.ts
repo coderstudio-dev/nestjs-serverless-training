@@ -8,8 +8,8 @@ import { Users } from '@prisma/client';
 export class UserService {
   constructor(private userRepository: UserRepository) {}
 
-  create(createProfileDto: CreateUserDto): Promise<Users> {
-    return this.userRepository.create(createProfileDto);
+  create(createUserDto: CreateUserDto): Promise<Users> {
+    return this.userRepository.create(createUserDto);
   }
 
   update(id: number, updateProfileDto: UpdateUserDto): Promise<Users> {
