@@ -6,12 +6,12 @@ import { DomainModule } from 'src/Domain/domain.module';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
 
 // controllers
-import { ArticleController } from './controller/article.controller';
-import { ArticleReactionsController } from './controller/article-reactions.controller';
-import { FollowsController } from './controller/follows.controller';
-import { ProfileController } from './controller/profile.controller';
-import { TagsController } from './controller/tags.controller';
-import { UserController } from './controller/user.controller';
+import { ArticleController } from './controllers/article.controller';
+import { ArticleReactionsController } from './controllers/article-reactions.controller';
+import { FollowsController } from './controllers/follows.controller';
+import { ProfileController } from './controllers/profile.controller';
+import { TagsController } from './controllers/tags.controller';
+import { UserController } from './controllers/user.controller';
 
 @Module({
   imports: [DomainModule, ConfigModule.forRoot({ isGlobal: true })],
