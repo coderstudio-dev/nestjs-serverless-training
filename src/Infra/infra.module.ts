@@ -10,6 +10,7 @@ import { ProfileRepositoriesRepository } from './Repository/profile-repositories
 import { TagsRepository } from './Repository/tags.repository';
 import { UserRepository } from './Repository/user.repository';
 import { FavoriteRepository } from './Repository/favorite.repository';
+import { CommentRepository } from './Repository/comment.repository';
 
 @Module({
   imports: [DatabaseModule],
@@ -22,6 +23,7 @@ import { FavoriteRepository } from './Repository/favorite.repository';
     TagsRepository,
     UserRepository,
     FavoriteRepository,
+    CommentRepository,
   ],
   exports: [
     ArticleRepository,
@@ -32,6 +34,7 @@ import { FavoriteRepository } from './Repository/favorite.repository';
     TagsRepository,
     UserRepository,
     FavoriteRepository,
+    CommentRepository,
   ],
 })
 export class InfraModule {}

@@ -29,6 +29,18 @@ export class FavoriteController {
     return this.favoriteservice.create(createFavoriteDto);
   }
 
+  @Get('profile/:profileId')
+  @ApiOkResponse({ type: [FavoriteEntity] })
+  findByProfileId(@Param('profileId', ParseIntPipe) profileId: number) {
+    return this.favoriteservice.findByProfileId(profileId);
+  }
+
+  @Get('article/:articleId')
+  @ApiOkResponse({ type: [FavoriteEntity] })
+  findByArticleId(@Param('articleId', ParseIntPipe) articleId: number) {
+    return this.favoriteservice.findByArticleId(articleId);
+  }
+
   @Patch(':id')
   @ApiCreatedResponse({ type: FavoriteEntity })
   update(
@@ -42,18 +54,6 @@ export class FavoriteController {
   @ApiOkResponse({ type: FavoriteEntity })
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.favoriteservice.findOne(id);
-  }
-
-  @Get(':profileId')
-  @ApiOkResponse({ type: [FavoriteEntity] })
-  findByProfileId(@Param('profileId', ParseIntPipe) profileId: number) {
-    return this.favoriteservice.findByProfileId(profileId);
-  }
-
-  @Get(':articleId')
-  @ApiOkResponse({ type: [FavoriteEntity] })
-  findByArticleId(@Param('articleId', ParseIntPipe) articleId: number) {
-    return this.favoriteservice.findByArticleId(articleId);
   }
 
   @Get()

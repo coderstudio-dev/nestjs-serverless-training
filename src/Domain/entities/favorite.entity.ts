@@ -1,5 +1,5 @@
 import { Favorites } from '@prisma/client';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class FavoriteEntity implements Favorites {
   @ApiProperty()
@@ -10,4 +10,7 @@ export class FavoriteEntity implements Favorites {
 
   @ApiProperty()
   articleId: number;
+
+  @ApiPropertyOptional()
+  createdAt: Date;
 }
