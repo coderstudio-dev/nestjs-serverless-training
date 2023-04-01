@@ -8,15 +8,15 @@ import {
   Delete,
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { TagsEntity } from 'src/Domain/Tag/tag.entity';
-import { TagsProvider } from 'src/Infra/Repository/Tag/tags.provider';
+import { TagsEntity } from 'src/Domain/entities/tag.entity';
+import { TagsService } from 'src/Domain/services/tags.service';
 import { CreateTagDto } from '../dto/Tag/create-tag.dto';
 import { UpdateTagDto } from '../dto/Tag/update-tag.dto';
 
 @Controller('tags')
 @ApiTags('tags')
 export class TagsController {
-  constructor(private readonly tagsService: TagsProvider) {}
+  constructor(private readonly tagsService: TagsService) {}
 
   @Post()
   @ApiCreatedResponse({ type: TagsEntity })

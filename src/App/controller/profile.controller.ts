@@ -6,31 +6,31 @@ import {
   Patch,
   Param,
   ParseIntPipe,
-  //Delete,
-  //UseGuards,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CreateProfileDto } from '../dto/Profile/create-profile.dto';
 import { UpdateProfileDto } from '../dto/Profile/update-profile.dto';
-import { ProfileEntity } from 'src/Domain/Profile/profile.entity';
-import { ProfileProvider } from 'src/Infra/Repository/Profile/profile.provider';
-//import { AuthGuard } from 'src/App/auth/auth.guard';
+import { ProfileEntity } from 'src/Domain/entities/profile.entity';
+import { ProfileService } from 'src/Domain/services/profile.service';
+import { AuthGuard } from '../guards/auth.guard';
 
+@UseGuards(AuthGuard)
 @Controller('profiles')
 @ApiTags('profiles')
 export class ProfileController {
-  constructor(private readonly profileProvider: ProfileProvider) {}
+  constructor(private readonly profileService: ProfileService) {}
 
   @Post()
   @ApiCreatedResponse({ type: ProfileEntity })
   create(@Body() createProfileDto: CreateProfileDto) {
-    return this.profileProvider.create(createProfileDto);
+    return this.profileService.create(createProfileDto);
   }
 
   @Get(':id')
   @ApiOkResponse({ type: ProfileEntity })
   findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.profileProvider.findOne(id);
+    return this.profileService.findOne(id);
   }
 
   @Patch(':id')
@@ -39,12 +39,12 @@ export class ProfileController {
     @Param('id', ParseIntPipe) id: number,
     @Body() updateProfileDto: UpdateProfileDto,
   ) {
-    return this.profileProvider.update(id, updateProfileDto);
+    return this.profileService.update(id, updateProfileDto);
   }
 
   // @Delete(':id')
   // @ApiOkResponse({ type: ArticleEntity })
   // remove(@Param('id', ParseIntPipe) id: number) {
-  //   return this.profileProvider.remove(id);
+  //   return this.profileService.remove(id);
   // }
 }

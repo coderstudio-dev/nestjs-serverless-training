@@ -6,44 +6,47 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiTags, ApiOkResponse } from '@nestjs/swagger';
-import { FollowsProvider } from 'src/Infra/Repository/Follow/follows.provider';
+import { FollowsService } from 'src/Domain/services/follows.service';
 import { CreateFollowDto } from '../dto/Follow/create-follow.dto';
 import { UpdateFollowDto } from '../dto/Follow/update-follow.dto';
-import { FollowEntity } from 'src/Domain/Follow/follow.entity';
+import { FollowEntity } from 'src/Domain/entities/follow.entity';
+import { AuthGuard } from '../guards/auth.guard';
 
+@UseGuards(AuthGuard)
 @Controller('follows')
 @ApiTags('follows')
 export class FollowsController {
-  constructor(private readonly followsProvider: FollowsProvider) {}
+  constructor(private readonly followsService: FollowsService) {}
 
   @Post()
   @ApiCreatedResponse({ type: FollowEntity })
   create(@Body() createFollowDto: CreateFollowDto) {
-    return this.followsProvider.create(createFollowDto);
+    return this.followsService.create(createFollowDto);
   }
 
   @Get()
   @ApiOkResponse({ type: FollowEntity })
   findAll() {
-    return this.followsProvider.findAll();
+    return this.followsService.findAll();
   }
 
   @Get(':id')
   @ApiOkResponse({ type: FollowEntity })
   findOne(@Param('id') id: string) {
-    return this.followsProvider.findOne(+id);
+    return this.followsService.findOne(+id);
   }
 
   @Patch(':id')
   @ApiCreatedResponse({ type: FollowEntity })
   update(@Param('id') id: string, @Body() updateFollowDto: UpdateFollowDto) {
-    return this.followsProvider.update(+id, updateFollowDto);
+    return this.followsService.update(+id, updateFollowDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.followsProvider.remove(+id);
+    return this.followsService.remove(+id);
   }
 }

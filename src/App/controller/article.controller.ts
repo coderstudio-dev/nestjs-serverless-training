@@ -12,37 +12,37 @@ import {
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CreateArticleDto } from '../dto/Article/create-article.dto';
 import { UpdateArticleDto } from '../dto/Article/update-article.dto';
-import { ArticleEntity } from 'src/Domain/Article/article.entity';
-import { ArticleProvider } from 'src/Infra/Repository/Article/article.provider';
-import { AuthGuard } from 'src/App/auth/auth.guard';
+import { ArticleEntity } from 'src/Domain/entities/article.entity';
+import { ArticleService } from 'src/Domain/services/article.service';
+import { AuthGuard } from '../guards/auth.guard';
 @Controller('articles')
 @ApiTags('articles')
 export class ArticleController {
-  constructor(private readonly articleProvider: ArticleProvider) {}
+  constructor(private readonly articleService: ArticleService) {}
 
   @Post()
   @ApiCreatedResponse({ type: ArticleEntity })
   create(@Body() createArticleDto: CreateArticleDto) {
-    return this.articleProvider.create(createArticleDto);
+    return this.articleService.create(createArticleDto);
   }
 
   @Get()
   @ApiOkResponse({ type: ArticleEntity, isArray: true })
   findAll() {
-    return this.articleProvider.findAll();
+    return this.articleService.findAll();
   }
 
   @UseGuards(AuthGuard)
   @Get('drafts')
   @ApiOkResponse({ type: ArticleEntity, isArray: true })
   findDrafts() {
-    return this.articleProvider.findDrafts();
+    return this.articleService.findDrafts();
   }
 
   @Get(':id')
   @ApiOkResponse({ type: ArticleEntity })
   findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.articleProvider.findOne(id);
+    return this.articleService.findOne(id);
   }
 
   @Patch(':id')
@@ -51,12 +51,12 @@ export class ArticleController {
     @Param('id', ParseIntPipe) id: number,
     @Body() updateArticleDto: UpdateArticleDto,
   ) {
-    return this.articleProvider.update(id, updateArticleDto);
+    return this.articleService.update(id, updateArticleDto);
   }
 
   @Delete(':id')
   @ApiOkResponse({ type: ArticleEntity })
   remove(@Param('id', ParseIntPipe) id: number) {
-    return this.articleProvider.remove(id);
+    return this.articleService.remove(id);
   }
 }

@@ -1,0 +1,36 @@
+import { Injectable } from '@nestjs/common';
+import { DatabaseService } from 'src/Infra/Database/database.service';
+import { CreateArticleDto } from 'src/App/dto/Article/create-article.dto';
+import { UpdateArticleDto } from 'src/App/dto/Article/update-article.dto';
+
+@Injectable()
+export class ArticleRepository {
+  constructor(private db: DatabaseService) {}
+
+  create(createArticleDto: CreateArticleDto) {
+    return this.db.articles.create({ data: createArticleDto });
+  }
+
+  findDrafts() {
+    return this.db.articles.findMany({ where: { status: 'draft' } });
+  }
+
+  findAll() {
+    return this.db.articles.findMany({ where: { status: 'posted' } });
+  }
+
+  findOne(id: number) {
+    return this.db.articles.findUnique({ where: { id } });
+  }
+
+  update(id: number, updateArticleDto: UpdateArticleDto) {
+    return this.db.articles.update({
+      where: { id },
+      data: updateArticleDto,
+    });
+  }
+
+  remove(id: number) {
+    return this.db.articles.delete({ where: { id } });
+  }
+}

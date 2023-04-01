@@ -20,16 +20,17 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "VisualStudioExptTeam.vscodeintellicode",
-        "christian-kohler.npm-intellisense",
-        "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode",
-        "eamodio.gitlens",
-        "xabikos.JavaScriptSnippets",
-        "mikestead.dotenv",
-        "aaron-bond.better-comments",
-        "redhat.vscode-yaml"
-      ]
+		"VisualStudioExptTeam.vscodeintellicode",
+		"christian-kohler.npm-intellisense",
+		"dbaeumer.vscode-eslint",
+		"esbenp.prettier-vscode",
+		"eamodio.gitlens",
+		"xabikos.JavaScriptSnippets",
+		"mikestead.dotenv",
+		"aaron-bond.better-comments",
+		"redhat.vscode-yaml",
+		"SonarSource.sonarlint-vscode"
+	]
     }
   }
   // Configure tool-specific properties.

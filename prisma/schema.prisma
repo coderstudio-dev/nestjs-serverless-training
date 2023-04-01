@@ -13,6 +13,8 @@ datasource db {
 model Users {
   id          Int      @id @default(autoincrement())
   profiles Profiles[]
+  username String @db.VarChar(256)
+  name String @db.VarChar(256)
   emailAddress  String  @db.VarChar(256)
   emailVerified Boolean
   authToken   String  @db.Text
@@ -226,3 +228,4 @@ model CommentReactions {
 
   @@map("comment_reactions")
 }
+
