@@ -12,6 +12,7 @@ async function main() {
       username: 'testaccount',
       emailAddress: 'test@test.com',
       emailVerified: true,
+      password: '$2a$10$4n.cJ23INbbFosI8cCFqmOweWI9pes9r0Fdat5y8oddaFJDeV5Sj2',
       authToken: 'test',
       session: 'test',
       sessionExpire: new Date(),
