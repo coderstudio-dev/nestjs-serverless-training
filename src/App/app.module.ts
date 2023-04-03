@@ -1,6 +1,7 @@
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DomainModule } from 'src/Domain/domain.module';
+import { JwtModule } from '@nestjs/jwt';
 
 //middlewares
 import { LoggerMiddleware } from './middlewares/logger.middleware';

@@ -1,5 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { HttpService } from '@nestjs/axios';
+import { JwtService } from '@nestjs/jwt';
 import { LoginDto } from 'src/App/dto/User/login.dto';
 import { SignUpDto } from 'src/App/dto/User/sign-up.dto';
 import { UpdateUserDto } from 'src/App/dto/User/update-user.dto';
@@ -18,6 +20,8 @@ export class UserService {
   constructor(
     private userRepository: UserRepository,
     private configService: ConfigService,
+    private jwtService: JwtService,
+    private httpService: HttpService,
   ) {
     this.AUTH0_DOMAIN = this.configService.get('AUTH0_DOMAIN');
     this.AUTH0_AUDIENCE = this.configService.get('AUTH0_AUDIENCE');
@@ -39,17 +43,31 @@ export class UserService {
 
     if (!isMatchPassword) throw new UnauthorizedException();
 
-    const url = `${this.AUTH0_DOMAIN}/oauth/token`;
+    const url = `${this.AUTH0_DOMAIN}oauth/token`;
     const body = JSON.stringify({
       client_id: this.AUTH0_CLIENT_ID,
       client_secret: this.AUTH0_CLIENT_SECRET,
       audience: this.AUTH0_AUDIENCE,
       grant_type: this.AUTH0_GRANT_TYPE,
     });
+    const headers = { 'content-type': 'application/json' };
+    console.log(url);
+    const getOAuthToken = await this.httpService.axiosRef.post(url, {
+      headers,
+      body,
+    });
+    console.log(getOAuthToken);
+    const token = getOAuthToken.data;
 
-    const response = await fetch(url, { body });
+    console.log(token);
 
-    return await response.json();
+    const payload = {
+      token,
+      user,
+      sub: user.id,
+    };
+
+    return { access_token: await this.jwtService.signAsync(payload) };
   }
 
   async signUp(signUpDto: SignUpDto): Promise<Users> {
