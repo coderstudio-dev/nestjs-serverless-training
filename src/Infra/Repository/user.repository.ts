@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { DatabaseService } from 'src/Infra/Database/database.service';
-import { CreateUserDto } from 'src/App/dto/User/create-user.dto';
+import { SignUpDto } from 'src/App/dto/User/sign-up.dto';
 import { UpdateUserDto } from 'src/App/dto/User/update-user.dto';
 import { Users } from '@prisma/client';
 
@@ -8,8 +8,19 @@ import { Users } from '@prisma/client';
 export class UserRepository {
   constructor(private db: DatabaseService) {}
 
-  create(createUserDto: CreateUserDto): Promise<Users> {
-    return this.db.users.create({ data: createUserDto });
+  create(signUpDto: SignUpDto): Promise<Users> {
+    delete signUpDto.confirmPassword;
+
+    const data = {
+      ...signUpDto,
+      emailVerified: false,
+      authToken: '',
+      session: ',',
+      sessionExpire: '',
+      lastLogin: '',
+      isActive: false,
+    };
+    return this.db.users.create({ data });
   }
 
   update(id: number, updateProfileDto: UpdateUserDto): Promise<Users> {
@@ -21,6 +32,10 @@ export class UserRepository {
 
   findOne(id: number): Promise<Users> {
     return this.db.users.findUnique({ where: { id } });
+  }
+
+  findByEmail(emailAddress: string): Promise<Users> {
+    return this.db.users.findUnique({ where: { emailAddress } });
   }
 
   remove(id: number): Promise<Users> {

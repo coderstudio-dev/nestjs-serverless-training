@@ -9,8 +9,9 @@ import {
   ParseIntPipe,
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { CreateUserDto } from '../dto/User/create-user.dto';
+import { SignUpDto } from '../dto/User/sign-up.dto';
 import { UpdateUserDto } from '../dto/User/update-user.dto';
+import { LoginDto } from '../dto/User/login.dto';
 import { UserEntity } from 'src/Domain/entities/user.entity';
 import { UserService } from 'src/Domain/services/user.service';
 
@@ -19,10 +20,16 @@ import { UserService } from 'src/Domain/services/user.service';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post()
+  @Post('login')
+  @ApiCreatedResponse({ type: Object })
+  login(@Body() loginDto: LoginDto) {
+    return this.userService.login(loginDto);
+  }
+
+  @Post('sign-up')
   @ApiCreatedResponse({ type: UserEntity })
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
+  signUp(@Body() signUpDto: SignUpDto) {
+    return this.userService.signUp(signUpDto);
   }
 
   @Get(':id')
