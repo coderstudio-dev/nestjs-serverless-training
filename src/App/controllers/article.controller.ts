@@ -10,7 +10,6 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { CreateArticleDto } from '../dto/Article/create-article.dto';
 import { CreateArticleFullDto } from '../dto/Article/create-article-full.dto';
 import { UpdateArticleDto } from '../dto/Article/update-article.dto';
 import { ArticleEntity } from 'src/Domain/entities/article.entity';
