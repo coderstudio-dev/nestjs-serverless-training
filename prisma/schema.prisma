@@ -13,9 +13,10 @@ datasource db {
 model Users {
   id          Int      @id @default(autoincrement())
   profiles Profiles[]
-  username String @db.VarChar(256)
-  emailAddress  String  @db.VarChar(256)
+  username String @db.VarChar(256) @unique
+  emailAddress  String  @db.VarChar(256) @unique
   emailVerified Boolean
+  password    String  @db.Text
   authToken   String  @db.Text
   session     String  @db.Text
   sessionExpire   DateTime
