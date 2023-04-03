@@ -1,24 +1,40 @@
 import { Module } from '@nestjs/common';
-import { ArticleModule } from './Article/article.module';
-import { ArticleReactionsModule } from './ArticleReaction/article-reactions.module';
-import { TagsModule } from './Tag/tags.module';
-import { FollowsModule } from './Follow/follows.module';
-import { ArticleTagsModule } from './ArticleTag/article-tags.module';
+import { InfraModule } from 'src/Infra/infra.module';
+
+//services
+import { ArticleService } from './services/article.service';
+import { ArticleReactionsService } from './services/article-reactions.service';
+import { FollowsService } from './services/follows.service';
+import { ProfileService } from './services/profile.service';
+import { TagsService } from './services/tags.service';
+import { ProfileRepositoriesService } from './services/profile-repositories.service';
+import { UserService } from './services/user.service';
+import { Favoriteservice } from './services/favorite.service';
+import { CommentService } from './services/comment.service';
 
 @Module({
-  imports: [
-    ArticleModule,
-    ArticleReactionsModule,
-    ArticleTagsModule,
-    TagsModule,
-    FollowsModule,
+  imports: [InfraModule],
+  providers: [
+    ArticleService,
+    ArticleReactionsService,
+    FollowsService,
+    ProfileService,
+    TagsService,
+    ProfileRepositoriesService,
+    UserService,
+    Favoriteservice,
+    CommentService,
   ],
   exports: [
-    ArticleModule,
-    ArticleReactionsModule,
-    ArticleTagsModule,
-    TagsModule,
-    FollowsModule,
+    ArticleService,
+    ArticleReactionsService,
+    FollowsService,
+    ProfileService,
+    TagsService,
+    ProfileRepositoriesService,
+    UserService,
+    Favoriteservice,
+    CommentService,
   ],
 })
 export class DomainModule {}

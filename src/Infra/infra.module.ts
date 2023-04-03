@@ -1,8 +1,40 @@
 import { Module } from '@nestjs/common';
-import { RepositoryModule } from './Repository/repository.module';
+import { DatabaseModule } from './Database/database.module';
+
+// repositories
+import { ArticleRepository } from './Repository/article.repository';
+import { ArticleReactionRepository } from './Repository/article-reactions.repository';
+import { FollowRepository } from './Repository/follows.repository';
+import { ProfileRepository } from './Repository/profile.repository';
+import { ProfileRepositoriesRepository } from './Repository/profile-repositories.repository';
+import { TagsRepository } from './Repository/tags.repository';
+import { UserRepository } from './Repository/user.repository';
+import { FavoriteRepository } from './Repository/favorite.repository';
+import { CommentRepository } from './Repository/comment.repository';
 
 @Module({
-  imports: [RepositoryModule],
-  exports: [RepositoryModule],
+  imports: [DatabaseModule],
+  providers: [
+    ArticleRepository,
+    ArticleReactionRepository,
+    FollowRepository,
+    ProfileRepository,
+    ProfileRepositoriesRepository,
+    TagsRepository,
+    UserRepository,
+    FavoriteRepository,
+    CommentRepository,
+  ],
+  exports: [
+    ArticleRepository,
+    ArticleReactionRepository,
+    FollowRepository,
+    ProfileRepository,
+    ProfileRepositoriesRepository,
+    TagsRepository,
+    UserRepository,
+    FavoriteRepository,
+    CommentRepository,
+  ],
 })
 export class InfraModule {}

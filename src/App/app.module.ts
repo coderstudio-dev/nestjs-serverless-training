@@ -1,23 +1,35 @@
-import { Module } from '@nestjs/common';
+import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { AuthModule } from './auth/auth.module';
-import { InfraModule } from 'src/Infra/infra.module';
+import { DomainModule } from 'src/Domain/domain.module';
+
+//middlewares
+import { LoggerMiddleware } from './middlewares/logger.middleware';
 
 // controllers
-import { ArticleController } from './controller/article.controller';
-import { ArticleReactionsController } from './controller/article-reactions.controller';
-import { FollowsController } from './controller/follows.controller';
-import { ProfileController } from './controller/profile.controller';
-import { TagsController } from './controller/tags.controller';
+import { ArticleController } from './controllers/article.controller';
+import { ArticleReactionsController } from './controllers/article-reactions.controller';
+import { FollowsController } from './controllers/follows.controller';
+import { ProfileController } from './controllers/profile.controller';
+import { TagsController } from './controllers/tags.controller';
+import { UserController } from './controllers/user.controller';
+import { FavoriteController } from './controllers/favorite.controller';
+import { CommentController } from './controllers/comment.controller';
 
 @Module({
-  imports: [InfraModule, AuthModule, ConfigModule.forRoot({ isGlobal: true })],
+  imports: [DomainModule, ConfigModule.forRoot({ isGlobal: true })],
   controllers: [
     ArticleController,
     ArticleReactionsController,
     FollowsController,
     ProfileController,
     TagsController,
+    UserController,
+    FavoriteController,
+    CommentController,
   ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggerMiddleware).forRoutes('*');
+  }
+}

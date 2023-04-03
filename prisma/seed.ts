@@ -9,6 +9,8 @@ async function main() {
     where: { id: 1 },
     update: {},
     create: {
+      username: 'testaccount',
+      name: 'Test Account',
       emailAddress: 'test@test.com',
       emailVerified: true,
       authToken: 'test',

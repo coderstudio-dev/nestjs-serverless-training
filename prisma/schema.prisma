@@ -13,6 +13,8 @@ datasource db {
 model Users {
   id          Int      @id @default(autoincrement())
   profiles Profiles[]
+  username String @db.VarChar(256)
+  name String @db.VarChar(256)
   emailAddress  String  @db.VarChar(256)
   emailVerified Boolean
   authToken   String  @db.Text
@@ -20,6 +22,7 @@ model Users {
   sessionExpire   DateTime
   lastLogin   DateTime
   isActive    Boolean
+
 
   @@map("users")
 }
@@ -61,6 +64,8 @@ model Profiles {
   profilefollowing ProfileFollows[] @relation("profileFollowingFK")
   saved_articles SavedArticles[]
   profile_repositories ProfileRepositories[]
+  comments Comments[]
+  favorites Favorites[]
 
   @@map("profiles")
 }
@@ -70,7 +75,7 @@ model Articles {
   profiles    Profiles @relation(fields: [profileId], references: [id])
   profileId   Int
   title       String   @unique
-  slug        String    @db.Text @unique
+  slug        String    @db.Text
   description String?  @db.Text
   bodyHtml    String   @db.Text
   body        String   @db.Text
@@ -90,6 +95,7 @@ model Articles {
   article_tags ArticleTags[]
   article_reactions ArticleReactions[]
   comments Comments[]
+  favorites Favorites[]
 
   @@map("articles")
 }
@@ -204,12 +210,21 @@ model ArticleTags {
 
 model Comments {
   id          Int      @id @default(autoincrement())
+
   articles    Articles @relation(fields: [articleId], references: [id])
   articleId   Int
-  parentId    Int?
-  comments    String   @db.Text
+  
+  parentId    Int?  
+  parent      Comments?   @relation("ParentChildren", fields: [parentId], references: [id])
+  children    Comments[]  @relation("ParentChildren")
+
+  content     String   @db.Text
+
   createdBy   Int
-  createdAt   DateTime
+  creator     Profiles @relation(fields: [createdBy], references: [id])
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   comment_reactions CommentReactions[]
 
@@ -226,4 +241,14 @@ model CommentReactions {
   reactedAt   DateTime
 
   @@map("comment_reactions")
+}
+
+model Favorites {
+  id          Int       @id @default(autoincrement())
+  profiles    Profiles  @relation(fields: [profileId], references: [id])
+  profileId   Int
+  articles    Articles  @relation(fields: [articleId], references: [id])
+  articleId   Int
+  createdAt   DateTime  @default(now())
+  @@unique([profileId, articleId])
 }
