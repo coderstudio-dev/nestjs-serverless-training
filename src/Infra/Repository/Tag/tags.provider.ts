@@ -14,6 +14,9 @@ export class TagsProvider {
   findAll() {
     return this.tagRepository.findAll();
   }
+  findByName(name: string) {
+    return this.tagRepository.findByName(name);
+  }
 
   findOne(id: number) {
     return this.tagRepository.findOne(id);

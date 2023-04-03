@@ -23,6 +23,10 @@ export class ArticleProvider {
     return this.articleRepository.findOne(id);
   }
 
+  findManyWithTags(id: number) {
+    return this.articleRepository.findManyWithTags(id);
+  }
+
   update(id: number, updateArticleDto: UpdateArticleDto) {
     return this.articleRepository.update(id, updateArticleDto);
   }

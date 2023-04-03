@@ -5,6 +5,7 @@ import {
   FindAll,
   FindOne,
   FindDrafts,
+  FindManyWithTags,
 } from './useCases';
 
 export interface ArticleRepoInterface
@@ -13,4 +14,5 @@ export interface ArticleRepoInterface
     Update,
     FindAll,
     FindOne,
-    FindDrafts {}
+    FindDrafts,
+    FindManyWithTags {}

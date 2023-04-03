@@ -3,6 +3,7 @@ import { DatabaseService } from 'src/Infra/Database/database.service';
 import { CreateTagDto } from 'src/App/dto/Tag/create-tag.dto';
 import { UpdateTagDto } from 'src/App/dto/Tag/update-tag.dto';
 import { TagRepoInterface } from 'src/Domain/Tag/tag.repo.interface';
+import { Tags } from '@prisma/client';
 
 @Injectable()
 export class TagsRepository implements TagRepoInterface {
@@ -14,6 +15,10 @@ export class TagsRepository implements TagRepoInterface {
 
   findAll() {
     return this.db.tags.findMany();
+  }
+
+  findByName(name: string) {
+    return this.db.tags.findUnique({ where: { name } });
   }
 
   findOne(id: number) {

@@ -1,16 +1,16 @@
 import {
   Create,
   Remove,
-  Update,
   FindAll,
   FindOne,
-  FindByName,
+  FindByArticleId,
+  FindByTagId,
 } from './useCases';
 
-export interface TagRepoInterface
+export interface ArticleTagRepoInterface
   extends Create,
     Remove,
-    Update,
     FindAll,
     FindOne,
-    FindByName {}
+    FindByArticleId,
+    FindByTagId {}

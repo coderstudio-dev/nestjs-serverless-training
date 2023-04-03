@@ -70,8 +70,9 @@ model Articles {
   profiles    Profiles @relation(fields: [profileId], references: [id])
   profileId   Int
   title       String   @unique
-  slug        String    @db.Text
+  slug        String    @db.Text @unique
   description String?  @db.Text
+  bodyHtml    String   @db.Text
   body        String   @db.Text
   coverBanner String   @db.VarChar(256)
   status      String   @db.VarChar(256)
@@ -120,7 +121,7 @@ model Badges {
 
 model Tags {
   id          Int      @id @default(autoincrement())
-  name        String
+  name        String   @unique
   tagCount    Int
 
   article_tags ArticleTags[]

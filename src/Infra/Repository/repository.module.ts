@@ -4,6 +4,7 @@ import { ArticleReactionsModule } from './ArticleReaction/article-reactions.modu
 import { TagsModule } from './Tag/tags.module';
 import { FollowsModule } from './Follow/follows.module';
 import { ProfileModule } from './Profile/profile.module';
+import { ArticleTagsModule } from './ArticleTag/article-tags.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { ProfileModule } from './Profile/profile.module';
     TagsModule,
     FollowsModule,
     ProfileModule,
+    ArticleTagsModule,
   ],
   exports: [
     ArticleModule,
@@ -19,6 +21,7 @@ import { ProfileModule } from './Profile/profile.module';
     TagsModule,
     FollowsModule,
     ProfileModule,
+    ArticleTagsModule,
   ],
 })
 export class RepositoryModule {}

@@ -2,7 +2,6 @@
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
-  IsBoolean,
   IsNotEmpty,
   IsOptional,
   IsString,
@@ -11,7 +10,7 @@ import {
   IsInt,
 } from 'class-validator';
 
-export class CreateArticleDto {
+export class CreateArticleFullDto {
   @IsInt()
   @IsNotEmpty()
   @ApiProperty()
@@ -23,8 +22,6 @@ export class CreateArticleDto {
   @ApiProperty()
   title: string;
 
-  @IsString()
-  @IsNotEmpty()
   @ApiPropertyOptional()
   slug: string;
 
@@ -55,36 +52,7 @@ export class CreateArticleDto {
   @ApiProperty()
   status: string;
 
-  @IsBoolean()
-  @IsOptional()
-  @ApiPropertyOptional({ nullable: true })
-  isPinned = false;
-
-  @IsOptional()
+  @IsString()
   @ApiPropertyOptional()
-  draftBy: number;
-
-  @IsOptional()
-  @ApiPropertyOptional()
-  draftAt: Date;
-
-  @IsOptional()
-  @ApiPropertyOptional()
-  postedBy: number;
-
-  @IsOptional()
-  @ApiPropertyOptional()
-  postedAt: Date;
-
-  @ApiProperty()
-  createdBy: number;
-
-  @ApiProperty()
-  createdAt: Date;
-
-  @ApiProperty()
-  updatedBy: number;
-
-  @ApiProperty()
-  updatedAt: Date;
+  articleTags: string;
 }

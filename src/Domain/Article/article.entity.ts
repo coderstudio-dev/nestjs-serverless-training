@@ -11,16 +11,19 @@ export class ArticleEntity implements Articles {
   @ApiProperty()
   title: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   slug: string;
 
   @ApiPropertyOptional({ nullable: true })
   description: string | null;
 
   @ApiProperty()
-  body: string;
+  bodyHtml: string;
 
   @ApiProperty()
+  body: string;
+
+  @ApiPropertyOptional()
   coverBanner: string;
 
   @ApiProperty()

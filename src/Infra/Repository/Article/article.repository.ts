@@ -23,6 +23,16 @@ export class ArticleRepository implements ArticleRepoInterface {
   findOne(id: number) {
     return this.db.articles.findUnique({ where: { id } });
   }
+  findManyWithTags(id: number) {
+    return this.db.articles.findMany({
+      where: { id },
+      include: {
+        article_tags: {
+          include: { tags: { select: { id: true, name: true } } },
+        },
+      },
+    });
+  }
 
   update(id: number, updateArticleDto: UpdateArticleDto) {
     return this.db.articles.update({
