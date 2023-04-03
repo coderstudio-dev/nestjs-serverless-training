@@ -17,6 +17,9 @@ export class UserEntity implements Users {
   @ApiPropertyOptional()
   emailVerified: boolean;
 
+  @ApiProperty()
+  password: string;
+
   @ApiPropertyOptional()
   authToken: string;
 
