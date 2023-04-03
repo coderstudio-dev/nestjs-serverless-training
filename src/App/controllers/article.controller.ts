@@ -17,13 +17,13 @@ import { ArticleEntity } from 'src/Domain/entities/article.entity';
 import { ArticleService } from 'src/Domain/services/article.service';
 import { AuthGuard } from '../guards/auth.guard';
 import { TagsService } from 'src/Domain/services/tags.service';
-import { ArticleTagsProvider } from 'src/Infra/Repository/ArticleTag/article-tags.provider';
+import { ArticleTagsService } from 'src/Domain/services/article-tags.service';
 @Controller('articles')
 @ApiTags('articles')
 export class ArticleController {
   constructor(
     private readonly tagsService: TagsService,
-    private readonly articleTagsProvider: ArticleTagsProvider,
+    private readonly articleTagsService: ArticleTagsService,
     private readonly articleService: ArticleService,
   ) {}
   async articleTagFn(articleId, isExistTag, tagName) {
@@ -41,14 +41,14 @@ export class ArticleController {
     }
     // check if exist
     const articleTagsData =
-      await this.articleTagsProvider.findByArticleIdAndTagId({
+      await this.articleTagsService.findByArticleIdAndTagId({
         articleId,
         tagsId: tagId,
       });
     // checker to not duplicate article tags
     if (!articleTagsData.length) {
       // insert to article tags
-      await this.articleTagsProvider.create({
+      await this.articleTagsService.create({
         articleId,
         tagsId: tagId,
         createdAt: new Date(),

@@ -10,7 +10,6 @@ async function main() {
     update: {},
     create: {
       username: 'testaccount',
-      name: 'Test Account',
       emailAddress: 'test@test.com',
       emailVerified: true,
       authToken: 'test',
@@ -83,7 +82,7 @@ async function main() {
       updatedAt: new Date('2023-03-18 00:00:00'),
     },
   });
-  console.log({ user, profile1, post1, post2 });
+  console.log({ user, countries, profile1, post1, post2 });
 }
 
 // execute the main function

@@ -3,6 +3,7 @@ import { InfraModule } from 'src/Infra/infra.module';
 
 //services
 import { ArticleService } from './services/article.service';
+import { ArticleTagsService } from './services/article-tags.service';
 import { ArticleReactionsService } from './services/article-reactions.service';
 import { FollowsService } from './services/follows.service';
 import { ProfileService } from './services/profile.service';
@@ -16,6 +17,7 @@ import { CommentService } from './services/comment.service';
   imports: [InfraModule],
   providers: [
     ArticleService,
+    ArticleTagsService,
     ArticleReactionsService,
     FollowsService,
     ProfileService,
@@ -27,6 +29,7 @@ import { CommentService } from './services/comment.service';
   ],
   exports: [
     ArticleService,
+    ArticleTagsService,
     ArticleReactionsService,
     FollowsService,
     ProfileService,

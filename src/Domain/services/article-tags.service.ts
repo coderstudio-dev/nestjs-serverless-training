@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { CreateArticleTagDto } from 'src/App/dto/ArticleTag/create-article-tag.dto';
 import { UpdateArticleTagDto } from 'src/App/dto/ArticleTag/update-article-tag.dto';
-import { ArticleTagsRepository } from './article-tags.repository';
+import { ArticleTagsRepository } from 'src/Infra/Repository/article-tags.repository';
 
 @Injectable()
-export class ArticleTagsProvider {
+export class ArticleTagsService {
   constructor(private articleTagRepository: ArticleTagsRepository) {}
 
   create(createArticleTagDto: CreateArticleTagDto) {

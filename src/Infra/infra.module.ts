@@ -3,6 +3,7 @@ import { DatabaseModule } from './Database/database.module';
 
 // repositories
 import { ArticleRepository } from './Repository/article.repository';
+import { ArticleTagsRepository } from './Repository/article-tags.repository';
 import { ArticleReactionRepository } from './Repository/article-reactions.repository';
 import { FollowRepository } from './Repository/follows.repository';
 import { ProfileRepository } from './Repository/profile.repository';
@@ -16,6 +17,7 @@ import { CommentRepository } from './Repository/comment.repository';
   imports: [DatabaseModule],
   providers: [
     ArticleRepository,
+    ArticleTagsRepository,
     ArticleReactionRepository,
     FollowRepository,
     ProfileRepository,
@@ -27,6 +29,7 @@ import { CommentRepository } from './Repository/comment.repository';
   ],
   exports: [
     ArticleRepository,
+    ArticleTagsRepository,
     ArticleReactionRepository,
     FollowRepository,
     ProfileRepository,
