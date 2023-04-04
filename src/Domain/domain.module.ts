@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
-import { HttpModule } from '@nestjs/axios';
 import { InfraModule } from 'src/Infra/infra.module';
 
 //services
@@ -19,7 +18,6 @@ import { CommentService } from './services/comment.service';
 @Module({
   imports: [
     InfraModule,
-    HttpModule,
     JwtModule.registerAsync({
       useFactory: (configService: ConfigService) => ({
         secret: configService.get('JWT_SECRET'),

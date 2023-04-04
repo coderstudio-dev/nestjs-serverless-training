@@ -1,7 +1,7 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, UnauthorizedException, UseGuards } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { HttpService } from '@nestjs/axios';
 import { JwtService } from '@nestjs/jwt';
+import fetch from 'node-fetch';
 import { LoginDto } from 'src/App/dto/User/login.dto';
 import { SignUpDto } from 'src/App/dto/User/sign-up.dto';
 import { UpdateUserDto } from 'src/App/dto/User/update-user.dto';
@@ -21,7 +21,6 @@ export class UserService {
     private userRepository: UserRepository,
     private configService: ConfigService,
     private jwtService: JwtService,
-    private httpService: HttpService,
   ) {
     this.AUTH0_DOMAIN = this.configService.get('AUTH0_DOMAIN');
     this.AUTH0_AUDIENCE = this.configService.get('AUTH0_AUDIENCE');
@@ -51,20 +50,17 @@ export class UserService {
       grant_type: this.AUTH0_GRANT_TYPE,
     });
     const headers = { 'content-type': 'application/json' };
-    console.log(url);
-    const getOAuthToken = await this.httpService.axiosRef.post(url, {
+    const response = await fetch(url, {
+      method: 'POST',
       headers,
       body,
     });
-    console.log(getOAuthToken);
-    const token = getOAuthToken.data;
 
-    console.log(token);
+    const { access_token } = await response.json();
 
     const payload = {
-      token,
-      user,
-      sub: user.id,
+      access_token,
+      sub: user.emailAddress,
     };
 
     return { access_token: await this.jwtService.signAsync(payload) };
