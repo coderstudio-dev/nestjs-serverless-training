@@ -1,8 +1,4 @@
-import {
-  ConsoleSpanExporter,
-  SimpleSpanProcessor,
-  BatchSpanProcessor
-} from '@opentelemetry/sdk-trace-base';
+import { SimpleSpanProcessor } from '@opentelemetry/sdk-trace-base';
 import { NodeSDK } from '@opentelemetry/sdk-node';
 import * as process from 'process';
 import { HttpInstrumentation } from '@opentelemetry/instrumentation-http';
@@ -30,9 +26,8 @@ export const otelSDK = new NodeSDK({
   resource: new Resource({
     [SemanticResourceAttributes.SERVICE_NAME]: 'nestjs-otel', // update this to a more relevant name for you!
   }),
-  // spanProcessor: new SimpleSpanProcessor(traceExporter),
+  spanProcessor: new SimpleSpanProcessor(traceExporter),
   // spanProcessor: new BatchSpanProcessor(traceExporter),
-  traceExporter,
   instrumentations: [
     new HttpInstrumentation(),
     new ExpressInstrumentation(),
