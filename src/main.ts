@@ -4,8 +4,10 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './App/app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
+import { otelSDK } from './tracing';
 
 async function bootstrap() {
+  await otelSDK.start();
   const app = await NestFactory.create(AppModule);
 
   app.enableCors();

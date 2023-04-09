@@ -5,11 +5,14 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './App/app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
+import { otelSDK } from './tracing';
 
 let cachedServer;
 
 export const handler = async (event: any, context: any) => {
   if (!cachedServer) {
+    // Start SDK before nestjs factory create
+    await otelSDK.start();
     const nestApp = await NestFactory.create(AppModule);
 
     nestApp.enableCors();
