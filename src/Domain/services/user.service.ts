@@ -17,11 +17,14 @@ export class UserService {
   private AUTH0_CLIENT_SECRET: string;
   private AUTH0_GRANT_TYPE: string;
   private BCRYPT_SALT_ROUNDS: number;
+  private APP_DOMAIN: string;
+
   constructor(
     private userRepository: UserRepository,
     private configService: ConfigService,
     private jwtService: JwtService,
   ) {
+    this.APP_DOMAIN = this.configService.get('APP_DOMAIN');
     this.AUTH0_DOMAIN = this.configService.get('AUTH0_DOMAIN');
     this.AUTH0_AUDIENCE = this.configService.get('AUTH0_AUDIENCE');
     this.AUTH0_CLIENT_ID = this.configService.get('AUTH0_CLIENT_ID');
@@ -79,6 +82,27 @@ export class UserService {
     signUpDto.password = hashedPassword;
 
     return this.userRepository.create(signUpDto);
+  }
+
+  async callback(code: string): Promise<any> {
+    console.log(code);
+    const url = `${this.AUTH0_DOMAIN}oauth/token`;
+    const body = JSON.stringify({
+      code,
+      client_id: this.AUTH0_CLIENT_ID,
+      client_secret: this.AUTH0_CLIENT_SECRET,
+      audience: this.AUTH0_AUDIENCE,
+      grant_type: this.AUTH0_GRANT_TYPE,
+      redirect_uri: `${this.APP_DOMAIN}users/callback`,
+    });
+    const headers = { 'content-type': 'application/json' };
+    const response = await fetch(url, {
+      method: 'POST',
+      headers,
+      body,
+    });
+
+    return response.json();
   }
 
   update(id: number, updateProfileDto: UpdateUserDto): Promise<Users> {

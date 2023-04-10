@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   ParseIntPipe,
+  Query,
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { SignUpDto } from '../dto/User/sign-up.dto';
@@ -19,6 +20,12 @@ import { UserService } from 'src/Domain/services/user.service';
 @ApiTags('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
+
+  @Get('callback')
+  callback(@Query() queryParams: any) {
+    const { code } = queryParams;
+    return this.userService.callback(code);
+  }
 
   @Post('login')
   @ApiCreatedResponse({ type: Object })
