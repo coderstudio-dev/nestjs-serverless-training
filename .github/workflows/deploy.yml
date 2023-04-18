@@ -3,11 +3,11 @@ name: lambda-deployment-with-github-action-test
 on:
   push:
     branches:
-      develop # You can use any of your root or master branch name
+      - develop # You can use any of your root or master branch name
 
 jobs:
   lambda-deploy:
-  	runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout to repo
         uses: actions/checkout@v2
