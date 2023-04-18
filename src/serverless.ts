@@ -1,11 +1,10 @@
 // src/serverless.ts
-
+import { otelSDK } from './tracing';
 import { configure as serverlessExpress } from '@vendia/serverless-express';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './App/app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
-import { otelSDK } from './tracing';
 
 let cachedServer;
 
