@@ -3,12 +3,12 @@ import { ConfigService } from '@nestjs/config';
 import { LoginDto } from 'src/App/dto/User/login.dto';
 import { SignUpDto } from 'src/App/dto/User/sign-up.dto';
 import { UpdateUserDto } from 'src/App/dto/User/update-user.dto';
-import { UserRepository } from '../../Infra/Repository/user.repository';
+import { AuthRepository } from '../../Infra/Repository/auth.repository';
 import { Users } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
-export class UserService {
+export class AuthService {
   private AUTH0_DOMAIN: string;
   private AUTH0_AUDIENCE: string;
   private AUTH0_CLIENT_ID: string;
@@ -16,7 +16,7 @@ export class UserService {
   private AUTH0_GRANT_TYPE: string;
   private BCRYPT_SALT_ROUNDS: number;
   constructor(
-    private userRepository: UserRepository,
+    private authRepository: AuthRepository,
     private configService: ConfigService,
   ) {
     this.AUTH0_DOMAIN = this.configService.get('AUTH0_DOMAIN');
@@ -30,8 +30,8 @@ export class UserService {
   }
 
   async login(loginDto: LoginDto): Promise<any> {
-    const { emailAddress, password } = loginDto;
-    const user = await this.userRepository.findByEmail(emailAddress);
+    const { email, password } = loginDto;
+    const user = await this.authRepository.findByEmail(email);
 
     if (!user) throw new UnauthorizedException();
 
@@ -40,42 +40,59 @@ export class UserService {
     if (!isMatchPassword) throw new UnauthorizedException();
 
     const url = `${this.AUTH0_DOMAIN}/oauth/token`;
-    const body = JSON.stringify({
+
+    const headers = { 'content-type': 'application/x-www-form-urlencoded' };
+
+    const body = new URLSearchParams({
       client_id: this.AUTH0_CLIENT_ID,
       client_secret: this.AUTH0_CLIENT_SECRET,
       audience: this.AUTH0_AUDIENCE,
       grant_type: this.AUTH0_GRANT_TYPE,
+      scope: 'openid email',
+      username: email,
+      password,
     });
 
-    const response = await fetch(url, { body });
+    const options = {
+      method: 'POST',
+      headers,
+      body,
+    };
+
+    const response = await fetch(url, options);
 
     return await response.json();
   }
 
   async signUp(signUpDto: SignUpDto): Promise<Users> {
-    const { confirmPassword, ...user } = signUpDto;
+    const { confirmPassword, password, username, emailAddress } = signUpDto;
 
-    if (user.password !== confirmPassword) throw new UnauthorizedException();
-
-    const hashedPassword = await bcrypt.hash(
-      user.password,
-      this.BCRYPT_SALT_ROUNDS,
+    const user = await this.authRepository.findByEmailOrUsername(
+      emailAddress,
+      username,
     );
 
-    signUpDto.password = hashedPassword;
+    if (user) throw new UnauthorizedException();
 
-    return this.userRepository.create(signUpDto);
+    if (password !== confirmPassword) throw new UnauthorizedException();
+
+    const hashedPassword = await bcrypt.hash(password, this.BCRYPT_SALT_ROUNDS);
+
+    signUpDto.password = hashedPassword;
+    delete signUpDto.confirmPassword;
+
+    return await this.authRepository.signUp(signUpDto);
   }
 
   update(id: number, updateProfileDto: UpdateUserDto): Promise<Users> {
-    return this.userRepository.update(id, updateProfileDto);
+    return this.authRepository.update({ id }, updateProfileDto);
   }
 
-  findOne(id: number): Promise<Users> {
-    return this.userRepository.findOne(id);
+  findById(id: number): Promise<Users> {
+    return this.authRepository.findById(id);
   }
 
   remove(id: number): Promise<Users> {
-    return this.userRepository.remove(id);
+    return this.authRepository.remove(id);
   }
 }

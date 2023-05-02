@@ -9,7 +9,7 @@ import { FollowsService } from './services/follows.service';
 import { ProfileService } from './services/profile.service';
 import { TagsService } from './services/tags.service';
 import { ProfileRepositoriesService } from './services/profile-repositories.service';
-import { UserService } from './services/user.service';
+import { AuthService } from './services/auth.service';
 import { Favoriteservice } from './services/favorite.service';
 import { CommentService } from './services/comment.service';
 
@@ -23,7 +23,7 @@ import { CommentService } from './services/comment.service';
     ProfileService,
     TagsService,
     ProfileRepositoriesService,
-    UserService,
+    AuthService,
     Favoriteservice,
     CommentService,
   ],
@@ -35,7 +35,7 @@ import { CommentService } from './services/comment.service';
     ProfileService,
     TagsService,
     ProfileRepositoriesService,
-    UserService,
+    AuthService,
     Favoriteservice,
     CommentService,
   ],

@@ -9,7 +9,7 @@ import { FollowRepository } from './Repository/follows.repository';
 import { ProfileRepository } from './Repository/profile.repository';
 import { ProfileRepositoriesRepository } from './Repository/profile-repositories.repository';
 import { TagsRepository } from './Repository/tags.repository';
-import { UserRepository } from './Repository/user.repository';
+import { AuthRepository } from './Repository/auth.repository';
 import { FavoriteRepository } from './Repository/favorite.repository';
 import { CommentRepository } from './Repository/comment.repository';
 
@@ -23,7 +23,7 @@ import { CommentRepository } from './Repository/comment.repository';
     ProfileRepository,
     ProfileRepositoriesRepository,
     TagsRepository,
-    UserRepository,
+    AuthRepository,
     FavoriteRepository,
     CommentRepository,
   ],
@@ -35,7 +35,7 @@ import { CommentRepository } from './Repository/comment.repository';
     ProfileRepository,
     ProfileRepositoriesRepository,
     TagsRepository,
-    UserRepository,
+    AuthRepository,
     FavoriteRepository,
     CommentRepository,
   ],

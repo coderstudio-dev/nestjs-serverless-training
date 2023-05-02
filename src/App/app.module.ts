@@ -11,7 +11,7 @@ import { ArticleReactionsController } from './controllers/article-reactions.cont
 import { FollowsController } from './controllers/follows.controller';
 import { ProfileController } from './controllers/profile.controller';
 import { TagsController } from './controllers/tags.controller';
-import { UserController } from './controllers/user.controller';
+import { AuthController } from './controllers/auth.controller';
 import { FavoriteController } from './controllers/favorite.controller';
 import { CommentController } from './controllers/comment.controller';
 
@@ -23,7 +23,7 @@ import { CommentController } from './controllers/comment.controller';
     FollowsController,
     ProfileController,
     TagsController,
-    UserController,
+    AuthController,
     FavoriteController,
     CommentController,
   ],
