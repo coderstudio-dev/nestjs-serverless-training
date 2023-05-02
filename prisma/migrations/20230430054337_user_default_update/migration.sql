@@ -1,0 +1,7 @@
+-- AlterTable
+ALTER TABLE "users" ALTER COLUMN "emailVerified" SET DEFAULT false,
+ALTER COLUMN "authToken" DROP NOT NULL,
+ALTER COLUMN "session" DROP NOT NULL,
+ALTER COLUMN "sessionExpire" DROP NOT NULL,
+ALTER COLUMN "lastLogin" DROP NOT NULL,
+ALTER COLUMN "isActive" SET DEFAULT true;

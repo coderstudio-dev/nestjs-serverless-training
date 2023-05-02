@@ -15,13 +15,13 @@ model Users {
   profiles Profiles[]
   username String @db.VarChar(256) @unique
   emailAddress  String  @db.VarChar(256) @unique
-  emailVerified Boolean
+  emailVerified Boolean @default(false)
   password    String  @db.Text
-  authToken   String  @db.Text
-  session     String  @db.Text
-  sessionExpire   DateTime
-  lastLogin   DateTime
-  isActive    Boolean
+  authToken   String?  @db.Text 
+  session     String?  @db.Text 
+  sessionExpire   DateTime? 
+  lastLogin   DateTime? 
+  isActive    Boolean @default(true)
 
 
   @@map("users")
