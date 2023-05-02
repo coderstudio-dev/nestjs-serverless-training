@@ -3,7 +3,7 @@
 {
   "name": "Blog NestJS + Prisma",
   // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-  "image": "mcr.microsoft.com/devcontainers/typescript-node:0-16",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:0-18",
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
@@ -20,17 +20,18 @@
   "customizations": {
     "vscode": {
       "extensions": [
-		"VisualStudioExptTeam.vscodeintellicode",
-		"christian-kohler.npm-intellisense",
-		"dbaeumer.vscode-eslint",
-		"esbenp.prettier-vscode",
-		"eamodio.gitlens",
-		"xabikos.JavaScriptSnippets",
-		"mikestead.dotenv",
-		"aaron-bond.better-comments",
-		"redhat.vscode-yaml",
-		"SonarSource.sonarlint-vscode"
-	]
+        "VisualStudioExptTeam.vscodeintellicode",
+        "christian-kohler.npm-intellisense",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "eamodio.gitlens",
+        "xabikos.JavaScriptSnippets",
+        "mikestead.dotenv",
+        "aaron-bond.better-comments",
+        "redhat.vscode-yaml",
+        "SonarSource.sonarlint-vscode",
+        "ckolkman.vscode-postgres"
+      ]
     }
   }
   // Configure tool-specific properties.
